@@ -1,0 +1,24 @@
+{
+    "name": "Apple-Dex",
+    "short_name": "Apple-Dex",
+    "description": "A personal Pokedex for apples — log the varieties you've eaten.",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#f9fafb",
+    "theme_color": "#16a34a",
+    "icons": [
+        {
+            "src": "/images/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/images/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
