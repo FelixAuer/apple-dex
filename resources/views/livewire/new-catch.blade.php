@@ -394,7 +394,7 @@ new #[Layout('layouts.dex')] class extends Component
             {{-- Photo --}}
             <div>
                 <label class="block text-sm font-medium mb-1">{{ __('Photo (optional)') }}</label>
-                <input type="file" wire:model="photo" accept="image/*" capture="environment" class="w-full text-sm">
+                <input type="file" wire:model="photo" accept="image/*" class="w-full text-sm">
                 @if ($photo)
                     <img src="{{ $photo->temporaryUrl() }}" class="mt-2 h-32 w-32 object-cover rounded-lg">
                 @elseif ($existingPhotoUrl)
