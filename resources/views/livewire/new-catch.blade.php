@@ -2,6 +2,7 @@
 
 use App\Models\AppleCatch;
 use App\Models\Variety;
+use App\Support\EatenSynonyms;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -43,9 +44,12 @@ new #[Layout('layouts.dex')] class extends Component
 
     public ?string $existingPhotoUrl = null;
 
+    public string $eatenWord = 'eaten';
+
     public function mount(): void
     {
         $this->caughtAt = now()->toDateString();
+        $this->eatenWord = EatenSynonyms::pick();
 
         $user = Auth::user();
 
@@ -253,16 +257,13 @@ new #[Layout('layouts.dex')] class extends Component
             throw $e;
         }
 
-        $total = Variety::query()->visibleTo($user)->count();
         $caughtCount = Variety::query()->visibleTo($user)
             ->whereHas('catches', fn ($query) => $query->where('user_id', $user->id))
             ->count();
 
-        session()->flash('toast', __(':name caught! :caught / :total', [
-            'name' => $variety->name,
-            'caught' => $caughtCount,
-            'total' => $total,
-        ]));
+        $word = EatenSynonyms::pick();
+
+        session()->flash('toast', "{$variety->name} {$word}! {$caughtCount} ".Str::plural('variety', $caughtCount)." {$word} so far.");
 
         $this->redirect(route('dex'), navigate: true);
     }
@@ -308,7 +309,7 @@ new #[Layout('layouts.dex')] class extends Component
     @if ($this->alreadyCaught)
         <div class="rounded-lg bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 p-4 space-y-3">
             <p class="text-amber-800 dark:text-amber-200">
-                {{ __('Already caught on :date', ['date' => $this->alreadyCaught->caught_at->format('d.m.Y')]) }}
+                {{ __('Already :word on :date', ['word' => $eatenWord, 'date' => $this->alreadyCaught->caught_at->format('d.m.Y')]) }}
             </p>
             <a href="{{ route('varieties.show', $selectedVarietyId) }}" wire:navigate class="inline-block underline text-amber-900 dark:text-amber-100 font-medium">
                 {{ __('View variety') }} &rarr;

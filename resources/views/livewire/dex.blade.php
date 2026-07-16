@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Variety;
+use App\Support\EatenSynonyms;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -14,9 +15,12 @@ new #[Layout('layouts.dex')] class extends Component
 
     public string $sort = 'recent';
 
+    public string $eatenWord = 'eaten';
+
     public function mount(): void
     {
         $this->sort = session('dex_sort', 'recent');
+        $this->eatenWord = EatenSynonyms::pick();
 
         if (session()->has('toast')) {
             $this->dispatch('toast', message: session()->pull('toast'));
@@ -41,12 +45,6 @@ new #[Layout('layouts.dex')] class extends Component
                 'catches' => fn ($query) => $query->where('user_id', $user->id)->with('media'),
             ])
             ->get();
-    }
-
-    #[Computed]
-    public function total(): int
-    {
-        return $this->allVisible->count();
     }
 
     #[Computed]
@@ -84,7 +82,7 @@ new #[Layout('layouts.dex')] class extends Component
 <div class="pb-28">
     <div class="px-4 pt-4 space-y-4">
         <h1 class="text-2xl font-bold">
-            {{ __('Caught') }}: {{ $this->caughtCount }} / {{ $this->total }}
+            {{ $this->caughtCount }} {{ Str::plural('variety', $this->caughtCount) }} {{ $eatenWord }}
         </h1>
 
         <div class="relative">

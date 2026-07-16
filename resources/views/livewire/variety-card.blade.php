@@ -2,6 +2,7 @@
 
 use App\Models\AppleCatch;
 use App\Models\Variety;
+use App\Support\EatenSynonyms;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Computed;
@@ -27,6 +28,8 @@ new #[Layout('layouts.dex')] class extends Component
 
     public bool $confirmingVarietyDelete = false;
 
+    public string $eatenWord = 'eaten';
+
     public function mount(Variety $variety): void
     {
         $this->authorize('view', $variety);
@@ -34,6 +37,7 @@ new #[Layout('layouts.dex')] class extends Component
         $this->variety = $variety;
         $this->varietyName = $variety->name;
         $this->varietyOrigin = $variety->origin ?? '';
+        $this->eatenWord = EatenSynonyms::pick();
     }
 
     #[Computed]
@@ -158,7 +162,7 @@ new #[Layout('layouts.dex')] class extends Component
         </div>
 
         <div class="space-y-1 text-sm">
-            <p><span class="font-medium">{{ __('Caught') }}:</span> {{ $this->catch->caught_at->format('d.m.Y') }}</p>
+            <p><span class="font-medium">{{ Str::ucfirst($eatenWord) }}:</span> {{ $this->catch->caught_at->format('d.m.Y') }}</p>
 
             @if ($this->catch->location_label)
                 <p><span class="font-medium">{{ __('Location') }}:</span> {{ $this->catch->location_label }}</p>
