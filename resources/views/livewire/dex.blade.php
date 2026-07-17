@@ -17,10 +17,14 @@ new #[Layout('layouts.dex')] class extends Component
 
     public string $eatenWord = 'eaten';
 
+    public string $caughtWord = 'caught';
+
+    public string $uncaughtWord = 'caught';
+
     public function mount(): void
     {
         $this->sort = session('dex_sort', 'recent');
-        $this->eatenWord = EatenSynonyms::pick();
+        [$this->eatenWord, $this->caughtWord, $this->uncaughtWord] = EatenSynonyms::pickMany(3);
 
         if (session()->has('toast')) {
             $this->dispatch('toast', message: session()->pull('toast'));
@@ -30,7 +34,7 @@ new #[Layout('layouts.dex')] class extends Component
     public function updatedSort(): void
     {
         session(['dex_sort' => $this->sort]);
-        unset($this->allVisible);
+        unset($this->caught);
     }
 
     #[Computed]
@@ -54,28 +58,39 @@ new #[Layout('layouts.dex')] class extends Component
     }
 
     #[Computed]
-    public function grid(): Collection
+    public function filtered(): Collection
     {
         $varieties = $this->allVisible;
 
-        if ($this->search !== '') {
-            $needle = Str::lower(Str::ascii($this->search));
-
-            $varieties = $varieties->filter(
-                fn (Variety $variety) => str_contains(Str::lower(Str::ascii($variety->name)), $needle)
-            );
+        if ($this->search === '') {
+            return $varieties;
         }
 
-        [$caught, $uncaught] = $varieties->partition(fn (Variety $variety) => $variety->catches->isNotEmpty());
+        $needle = Str::lower(Str::ascii($this->search));
 
-        $caught = $caught->sortByDesc(fn (Variety $variety) => $variety->catches->first()->caught_at)->values();
-        $uncaught = $uncaught->sortBy(fn (Variety $variety) => Str::lower($variety->name))->values();
+        return $varieties->filter(
+            fn (Variety $variety) => str_contains(Str::lower(Str::ascii($variety->name)), $needle)
+        );
+    }
+
+    #[Computed]
+    public function caught(): Collection
+    {
+        $caught = $this->filtered->filter(fn (Variety $variety) => $variety->catches->isNotEmpty());
 
         return match ($this->sort) {
-            'az' => $varieties->sortBy(fn (Variety $variety) => Str::lower($variety->name))->values(),
-            'uncaught_first' => $uncaught->concat($caught),
-            default => $caught->concat($uncaught),
+            'az' => $caught->sortBy(fn (Variety $variety) => Str::lower($variety->name))->values(),
+            default => $caught->sortByDesc(fn (Variety $variety) => $variety->catches->first()->caught_at)->values(),
         };
+    }
+
+    #[Computed]
+    public function uncaught(): Collection
+    {
+        return $this->filtered
+            ->filter(fn (Variety $variety) => $variety->catches->isEmpty())
+            ->sortBy(fn (Variety $variety) => Str::lower($variety->name))
+            ->values();
     }
 }; ?>
 
@@ -87,7 +102,7 @@ new #[Layout('layouts.dex')] class extends Component
         </div>
     </div>
 
-    <div class="px-4 pt-4 space-y-3 anim-fade-rise" style="animation-delay: .1s">
+    <div class="px-4 pt-4 anim-fade-rise" style="animation-delay: .1s">
         <div class="relative">
             <input
                 type="search"
@@ -100,26 +115,10 @@ new #[Layout('layouts.dex')] class extends Component
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
             </svg>
         </div>
-
-        <div class="flex gap-2 text-xs font-bold">
-            @foreach (['recent' => __('Recent'), 'az' => __('A–Z'), 'uncaught_first' => __('Uncaught first')] as $value => $label)
-                <button
-                    type="button"
-                    wire:click="$set('sort', '{{ $value }}')"
-                    @class([
-                        'px-4 py-1.5 rounded-full transition-colors',
-                        'bg-dex-gold text-dex-gold-ink shadow-[0_3px_0_#a8891f]' => $sort === $value,
-                        'bg-dex-card text-dex-label' => $sort !== $value,
-                    ])
-                >
-                    {{ $label }}
-                </button>
-            @endforeach
-        </div>
     </div>
 
-    <div class="px-4 mt-5">
-        @if ($this->grid->isEmpty())
+    <div class="px-4 mt-6 space-y-10">
+        @if ($this->caught->isEmpty() && $this->uncaught->isEmpty())
             <div class="text-center py-16 space-y-4">
                 <p class="text-dex-meta">
                     {{ __('No varieties match ":search".', ['search' => $search]) }}
@@ -136,55 +135,93 @@ new #[Layout('layouts.dex')] class extends Component
                 @endif
             </div>
         @else
-            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3.5">
-                @foreach ($this->grid as $variety)
-                    @php
-                        $catch = $variety->catches->first();
-                        $rotation = ['-rotate-2', 'rotate-[1.5deg]', '-rotate-1'][$loop->index % 3];
-                        $delay = $catch ? (0.18 + min($loop->index, 9) * 0.02) : (0.36 + min($loop->index, 9) * 0.02);
-                    @endphp
+            @if ($this->caught->isNotEmpty())
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h2 class="font-display font-bold text-sm text-dex-label">{{ Str::ucfirst($caughtWord) }}</h2>
 
-                    <a
-                        href="{{ route('varieties.show', $variety) }}"
-                        wire:navigate
-                        wire:key="variety-{{ $variety->id }}"
-                        @class([
-                            'block rounded-2xl overflow-hidden anim-fade-in',
-                            'bg-dex-card shadow-[0_4px_0_#171d10] '.$rotation => $catch,
-                            'bg-dex-dim anim-fade-in-dim' => ! $catch,
-                        ])
-                        style="animation-delay: {{ $delay }}s"
-                    >
-                        @if ($catch)
-                            @php $photoUrl = $catch->getFirstMediaUrl('photo', 'thumb'); @endphp
+                        <div class="flex gap-2 text-xs font-bold">
+                            @foreach (['recent' => __('Recent'), 'az' => __('A–Z')] as $value => $label)
+                                <button
+                                    type="button"
+                                    wire:click="$set('sort', '{{ $value }}')"
+                                    @class([
+                                        'px-4 py-1.5 rounded-full transition-colors',
+                                        'bg-dex-gold text-dex-gold-ink shadow-[0_3px_0_#a8891f]' => $sort === $value,
+                                        'bg-dex-card text-dex-label' => $sort !== $value,
+                                    ])
+                                >
+                                    {{ $label }}
+                                </button>
+                            @endforeach
+                        </div>
+                    </div>
 
-                            <div class="aspect-[4/3] bg-cover bg-center bg-dex-surface" @if ($photoUrl) style="background-image: url('{{ $photoUrl }}')" @endif>
-                                @unless ($photoUrl)
-                                    <div class="w-full h-full flex items-center justify-center text-3xl">🍎</div>
-                                @endunless
-                            </div>
+                    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3.5">
+                        @foreach ($this->caught as $variety)
+                            @php
+                                $catch = $variety->catches->first();
+                                $rotation = ['-rotate-2', 'rotate-[1.5deg]', '-rotate-1'][$loop->index % 3];
+                                $delay = 0.18 + min($loop->index, 9) * 0.02;
+                                $photoUrl = $catch->getFirstMediaUrl('photo', 'thumb');
+                            @endphp
 
-                            <div class="px-2.5 py-2">
-                                <p class="font-display font-semibold text-dex-text text-[12.5px] truncate">{{ $variety->name }}</p>
-                            </div>
-                        @else
-                            @php $refUrl = $variety->getFirstMediaUrl('reference_photo', 'thumb'); @endphp
+                            <a
+                                href="{{ route('varieties.show', $variety) }}"
+                                wire:navigate
+                                wire:key="variety-{{ $variety->id }}"
+                                class="block rounded-2xl overflow-hidden anim-fade-in bg-dex-card shadow-[0_4px_0_#171d10] {{ $rotation }}"
+                                style="animation-delay: {{ $delay }}s"
+                            >
+                                <div class="aspect-[4/3] bg-cover bg-center bg-dex-surface" @if ($photoUrl) style="background-image: url('{{ $photoUrl }}')" @endif>
+                                    @unless ($photoUrl)
+                                        <div class="w-full h-full flex items-center justify-center text-3xl">🍎</div>
+                                    @endunless
+                                </div>
 
-                            <div class="aspect-[4/3] flex items-center justify-center">
-                                @if ($refUrl)
-                                    <div class="w-full h-full bg-cover bg-center grayscale opacity-60" style="background-image: url('{{ $refUrl }}')"></div>
-                                @else
-                                    <div class="w-8 h-8 rounded-[50%_50%_50%_6px] bg-dex-silhouette -rotate-45"></div>
-                                @endif
-                            </div>
+                                <div class="px-2.5 py-2">
+                                    <p class="font-display font-semibold text-dex-text text-[12.5px] truncate">{{ $variety->name }}</p>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
 
-                            <div class="px-2.5 py-2">
-                                <p class="font-display font-semibold text-dex-warm text-[12px] truncate">{{ $variety->name }}</p>
-                            </div>
-                        @endif
-                    </a>
-                @endforeach
-            </div>
+            @if ($this->uncaught->isNotEmpty())
+                <div class="space-y-3">
+                    <h2 class="font-display font-bold text-sm text-dex-label">{{ __('Not yet :word', ['word' => $uncaughtWord]) }}</h2>
+
+                    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3.5">
+                        @foreach ($this->uncaught as $variety)
+                            @php
+                                $delay = 0.18 + min($loop->index, 9) * 0.02;
+                                $refUrl = $variety->getFirstMediaUrl('reference_photo', 'thumb');
+                            @endphp
+
+                            <a
+                                href="{{ route('varieties.show', $variety) }}"
+                                wire:navigate
+                                wire:key="variety-{{ $variety->id }}"
+                                class="block rounded-2xl overflow-hidden anim-fade-in-dim bg-dex-dim"
+                                style="animation-delay: {{ $delay }}s"
+                            >
+                                <div class="aspect-[4/3] flex items-center justify-center">
+                                    @if ($refUrl)
+                                        <div class="w-full h-full bg-cover bg-center grayscale opacity-60" style="background-image: url('{{ $refUrl }}')"></div>
+                                    @else
+                                        <div class="w-8 h-8 rounded-[50%_50%_50%_6px] bg-dex-silhouette -rotate-45"></div>
+                                    @endif
+                                </div>
+
+                                <div class="px-2.5 py-2">
+                                    <p class="font-display font-semibold text-dex-warm text-[12px] truncate">{{ $variety->name }}</p>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
         @endif
     </div>
 
@@ -192,7 +229,7 @@ new #[Layout('layouts.dex')] class extends Component
         href="{{ route('catch.new') }}"
         wire:navigate
         class="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-dex-red-btn text-white text-2xl font-bold flex items-center justify-center shadow-[0_5px_0_#a5392b] active:translate-y-1 active:shadow-[0_1px_0_#a5392b] transition-[transform,box-shadow]"
-        aria-label="{{ __('Log a new catch') }}"
+        aria-label="{{ __('Log a new entry') }}"
     >
         +
     </a>

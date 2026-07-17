@@ -24,7 +24,8 @@ test('dex shows global varieties and own customs but never another user\'s custo
     $ownCustom = Variety::factory()->create(['user_id' => $user->id]);
     $othersCustom = Variety::factory()->create(['user_id' => $otherUser->id]);
 
-    $names = Volt::actingAs($user)->test('dex')->instance()->grid->pluck('name');
+    $instance = Volt::actingAs($user)->test('dex')->instance();
+    $names = $instance->caught->concat($instance->uncaught)->pluck('name');
 
     expect($names)->toContain($global->name, $ownCustom->name)
         ->not->toContain($othersCustom->name);
@@ -49,9 +50,10 @@ test('search filters the grid case-insensitively by substring', function () {
     Variety::factory()->create(['user_id' => null, 'name' => 'Gravensteiner']);
     Variety::factory()->create(['user_id' => null, 'name' => 'Boskoop']);
 
-    $names = Volt::actingAs($user)->test('dex')
+    $instance = Volt::actingAs($user)->test('dex')
         ->set('search', 'graven')
-        ->instance()->grid->pluck('name');
+        ->instance();
+    $names = $instance->caught->concat($instance->uncaught)->pluck('name');
 
     expect($names)->toContain('Gravensteiner')->not->toContain('Boskoop');
 });

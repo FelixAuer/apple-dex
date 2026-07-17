@@ -206,7 +206,7 @@ new #[Layout('layouts.dex')] class extends Component
         $this->validate($rules);
 
         if (! $this->creatingNew && $this->alreadyCaught) {
-            $this->addError('selectedVarietyId', __('This variety has already been caught.'));
+            $this->addError('selectedVarietyId', __('This variety already has an entry.'));
 
             return;
         }
@@ -249,7 +249,7 @@ new #[Layout('layouts.dex')] class extends Component
             });
         } catch (QueryException $e) {
             if ($e->getCode() === '23000') {
-                $this->addError('selectedVarietyId', __('This variety has already been caught.'));
+                $this->addError('selectedVarietyId', __('This variety already has an entry.'));
 
                 return;
             }
@@ -297,14 +297,14 @@ new #[Layout('layouts.dex')] class extends Component
                 ->toMediaCollection('photo');
         }
 
-        session()->flash('toast', __('Catch updated.'));
+        session()->flash('toast', __('Entry updated.'));
 
         $this->redirect(route('varieties.show', $catch->variety_id), navigate: true);
     }
 }; ?>
 
 <div class="px-4 py-5 max-w-lg mx-auto">
-    <h1 class="font-display font-bold text-xl text-dex-text mb-5">{{ $editingCatchId ? __('Edit catch') : __('Log a catch') }}</h1>
+    <h1 class="font-display font-bold text-xl text-dex-text mb-5">{{ $editingCatchId ? __('Edit entry') : __('Log an entry') }}</h1>
 
     @if ($this->alreadyCaught)
         <div class="rounded-xl bg-dex-surface p-4 space-y-3">
@@ -468,7 +468,7 @@ new #[Layout('layouts.dex')] class extends Component
                 wire:loading.attr="disabled"
                 class="w-full py-3.5 rounded-2xl bg-dex-gold text-dex-gold-ink font-display font-bold text-[15px] shadow-[0_5px_0_#a8891f] active:translate-y-1 active:shadow-[0_1px_0_#a8891f] transition-[transform,box-shadow] disabled:opacity-50"
             >
-                {{ $editingCatchId ? __('Save changes') : __('Save catch') }}
+                {{ $editingCatchId ? __('Save changes') : __('Save entry') }}
             </button>
         </form>
     @endif

@@ -188,17 +188,17 @@ new #[Layout('layouts.dex')] class extends Component
 
         <div class="flex gap-2.5 text-[13px] font-bold">
             <a href="{{ route('catch.new', ['catch' => $this->catch->id]) }}" wire:navigate class="flex-1 text-center py-2.5 rounded-[14px] bg-dex-card text-dex-text shadow-[0_3px_0_#171d10]">
-                {{ __('Edit catch') }}
+                {{ __('Edit entry') }}
             </a>
 
             <button type="button" wire:click="$set('confirmingCatchDelete', true)" class="flex-1 text-center py-2.5 rounded-[14px] bg-dex-delete-bg text-dex-delete-text shadow-[0_3px_0_#241511]">
-                {{ __('Delete catch') }}
+                {{ __('Delete entry') }}
             </button>
         </div>
 
         @if ($confirmingCatchDelete)
             <div class="rounded-xl bg-dex-surface p-4 space-y-3">
-                <p class="text-sm text-dex-label">{{ __('Delete this catch? The variety will return to uncaught.') }}</p>
+                <p class="text-sm text-dex-label">{{ __('Delete this entry? The variety will return to unlogged.') }}</p>
                 <div class="flex gap-3 text-sm font-bold">
                     <button type="button" wire:click="deleteCatch" class="px-3 py-1.5 rounded-lg bg-dex-delete-bg text-dex-delete-text">
                         {{ __('Yes, delete') }}
@@ -233,7 +233,7 @@ new #[Layout('layouts.dex')] class extends Component
             wire:navigate
             class="block text-center py-3.5 rounded-2xl bg-dex-red-btn text-white font-display font-bold text-base shadow-[0_5px_0_#a5392b] active:translate-y-1 active:shadow-[0_1px_0_#a5392b] transition-[transform,box-shadow]"
         >
-            {{ __('Catch it!') }} 🍏
+            {{ __('Log it!') }} 🍏
         </a>
     @endif
 
@@ -251,7 +251,7 @@ new #[Layout('layouts.dex')] class extends Component
 
                 @if ($confirmingVarietyDelete)
                     <div class="rounded-xl bg-dex-surface p-4 space-y-3">
-                        <p class="text-sm text-dex-label">{{ __('Delete this variety? Your catch of it will be deleted too. This cannot be undone.') }}</p>
+                        <p class="text-sm text-dex-label">{{ __('Delete this variety? Your entry for it will be deleted too. This cannot be undone.') }}</p>
                         <div class="flex gap-3 text-sm font-bold">
                             <button type="button" wire:click="deleteVariety" class="px-3 py-1.5 rounded-lg bg-dex-delete-bg text-dex-delete-text">
                                 {{ __('Yes, delete') }}
