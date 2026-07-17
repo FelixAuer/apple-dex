@@ -139,14 +139,14 @@ new #[Layout('layouts.dex')] class extends Component
     }
 }; ?>
 
-<div class="px-4 py-6 max-w-lg mx-auto space-y-6">
-    <a href="{{ route('dex') }}" wire:navigate class="text-sm text-gray-500">&larr; {{ __('Back to Dex') }}</a>
+<div class="px-4 py-5 max-w-lg mx-auto space-y-5">
+    <a href="{{ route('dex') }}" wire:navigate class="inline-block text-sm font-bold text-dex-gold">&larr; {{ __('Back to Dex') }}</a>
 
     @if ($this->catch)
         {{-- Caught state --}}
         @php $photoUrl = $this->catch->getFirstMediaUrl('photo', 'display'); @endphp
 
-        <div class="rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-800 aspect-square flex items-center justify-center">
+        <div class="rounded-[18px] overflow-hidden bg-dex-surface aspect-square flex items-center justify-center shadow-[0_6px_0_#10150a]">
             @if ($photoUrl)
                 <img src="{{ $photoUrl }}" class="w-full h-full object-cover">
             @else
@@ -155,53 +155,55 @@ new #[Layout('layouts.dex')] class extends Component
         </div>
 
         <div>
-            <h1 class="text-2xl font-bold">{{ $variety->name }}</h1>
+            <h1 class="font-display font-bold text-2xl text-dex-text">{{ $variety->name }}</h1>
             @if ($variety->origin)
-                <p class="text-gray-500 dark:text-gray-400">{{ $variety->origin }}</p>
+                <p class="text-dex-meta text-[13px] mt-0.5">{{ $variety->origin }}</p>
             @endif
         </div>
 
-        <div class="space-y-1 text-sm">
-            <p><span class="font-medium">{{ Str::ucfirst($eatenWord) }}:</span> {{ $this->catch->caught_at->format('d.m.Y') }}</p>
+        <div class="space-y-1 text-[13px] text-dex-label bg-dex-surface rounded-xl px-3.5 py-3">
+            <p>{{ Str::ucfirst($eatenWord) }}: {{ $this->catch->caught_at->format('d.m.Y') }}</p>
 
             @if ($this->catch->location_label)
-                <p><span class="font-medium">{{ __('Location') }}:</span> {{ $this->catch->location_label }}</p>
+                <p>{{ __('Location') }}: {{ $this->catch->location_label }}</p>
             @endif
 
             @if ($this->catch->lat && $this->catch->lng)
-                <a
-                    href="https://www.openstreetmap.org/?mlat={{ $this->catch->lat }}&mlon={{ $this->catch->lng }}#map=16/{{ $this->catch->lat }}/{{ $this->catch->lng }}"
-                    target="_blank"
-                    rel="noopener"
-                    class="text-green-700 dark:text-green-400 underline"
-                >
-                    {{ __('View on OpenStreetMap') }} &rarr;
-                </a>
+                <p>
+                    <a
+                        href="https://www.openstreetmap.org/?mlat={{ $this->catch->lat }}&mlon={{ $this->catch->lng }}#map=16/{{ $this->catch->lat }}/{{ $this->catch->lng }}"
+                        target="_blank"
+                        rel="noopener"
+                        class="text-dex-gold font-bold underline underline-offset-4"
+                    >
+                        {{ __('View on OpenStreetMap') }} &rarr;
+                    </a>
+                </p>
             @endif
         </div>
 
         @if ($this->catch->notes)
-            <p class="text-sm whitespace-pre-line">{{ $this->catch->notes }}</p>
+            <p class="text-sm text-dex-label whitespace-pre-line">{{ $this->catch->notes }}</p>
         @endif
 
-        <div class="flex flex-wrap gap-3 text-sm">
-            <a href="{{ route('catch.new', ['catch' => $this->catch->id]) }}" wire:navigate class="px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-700">
+        <div class="flex gap-2.5 text-[13px] font-bold">
+            <a href="{{ route('catch.new', ['catch' => $this->catch->id]) }}" wire:navigate class="flex-1 text-center py-2.5 rounded-[14px] bg-dex-card text-dex-text shadow-[0_3px_0_#171d10]">
                 {{ __('Edit catch') }}
             </a>
 
-            <button type="button" wire:click="$set('confirmingCatchDelete', true)" class="px-3 py-1.5 rounded-lg border border-red-300 text-red-600 dark:border-red-800 dark:text-red-400">
+            <button type="button" wire:click="$set('confirmingCatchDelete', true)" class="flex-1 text-center py-2.5 rounded-[14px] bg-dex-delete-bg text-dex-delete-text shadow-[0_3px_0_#241511]">
                 {{ __('Delete catch') }}
             </button>
         </div>
 
         @if ($confirmingCatchDelete)
-            <div class="rounded-lg border border-red-300 dark:border-red-800 p-4 space-y-3">
-                <p class="text-sm">{{ __('Delete this catch? The variety will return to uncaught.') }}</p>
-                <div class="flex gap-3">
-                    <button type="button" wire:click="deleteCatch" class="px-3 py-1.5 rounded-lg bg-red-600 text-white text-sm">
+            <div class="rounded-xl bg-dex-surface p-4 space-y-3">
+                <p class="text-sm text-dex-label">{{ __('Delete this catch? The variety will return to uncaught.') }}</p>
+                <div class="flex gap-3 text-sm font-bold">
+                    <button type="button" wire:click="deleteCatch" class="px-3 py-1.5 rounded-lg bg-dex-delete-bg text-dex-delete-text">
                         {{ __('Yes, delete') }}
                     </button>
-                    <button type="button" wire:click="$set('confirmingCatchDelete', false)" class="px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-700 text-sm">
+                    <button type="button" wire:click="$set('confirmingCatchDelete', false)" class="px-3 py-1.5 rounded-lg bg-dex-card text-dex-label">
                         {{ __('Cancel') }}
                     </button>
                 </div>
@@ -211,50 +213,50 @@ new #[Layout('layouts.dex')] class extends Component
         {{-- Uncaught state --}}
         @php $refUrl = $variety->getFirstMediaUrl('reference_photo', 'display'); @endphp
 
-        <div class="rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-800 aspect-square flex items-center justify-center">
+        <div class="rounded-[18px] overflow-hidden bg-dex-dim aspect-square flex items-center justify-center shadow-[0_6px_0_#10150a]">
             @if ($refUrl)
-                <img src="{{ $refUrl }}" class="w-full h-full object-cover grayscale opacity-60">
+                <img src="{{ $refUrl }}" class="w-full h-full object-cover grayscale opacity-75">
             @else
-                <img src="{{ asset('images/apple-silhouette.svg') }}" alt="" class="w-1/2 h-1/2 text-gray-400 dark:text-gray-600">
+                <div class="w-16 h-16 rounded-[50%_50%_50%_10px] bg-dex-silhouette -rotate-45"></div>
             @endif
         </div>
 
         <div>
-            <h1 class="text-2xl font-bold">{{ $variety->name }}</h1>
+            <h1 class="font-display font-bold text-2xl text-dex-text">{{ $variety->name }}</h1>
             @if ($variety->origin)
-                <p class="text-gray-500 dark:text-gray-400">{{ $variety->origin }}</p>
+                <p class="text-dex-meta text-[13px] mt-0.5">{{ $variety->origin }}</p>
             @endif
         </div>
 
         <a
             href="{{ route('catch.new', ['variety' => $variety->id]) }}"
             wire:navigate
-            class="block text-center py-3 rounded-lg bg-green-600 text-white font-semibold"
+            class="block text-center py-3.5 rounded-2xl bg-dex-red-btn text-white font-display font-bold text-base shadow-[0_5px_0_#a5392b] active:translate-y-1 active:shadow-[0_1px_0_#a5392b] transition-[transform,box-shadow]"
         >
-            {{ __('Catch it!') }}
+            {{ __('Catch it!') }} 🍏
         </a>
     @endif
 
     @if ($this->isOwnCustom)
-        <div class="border-t border-gray-200 dark:border-gray-700 pt-4 space-y-3">
+        <div class="border-t border-dex-surface pt-4 space-y-3">
             @if (! $editingVariety)
-                <div class="flex flex-wrap gap-3 text-sm">
-                    <button type="button" wire:click="startEditingVariety" class="px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-700">
+                <div class="flex flex-wrap gap-2.5 text-[13px] font-bold">
+                    <button type="button" wire:click="startEditingVariety" class="px-3.5 py-1.5 rounded-xl bg-dex-card text-dex-text">
                         {{ __('Edit variety') }}
                     </button>
-                    <button type="button" wire:click="$set('confirmingVarietyDelete', true)" class="px-3 py-1.5 rounded-lg border border-red-300 text-red-600 dark:border-red-800 dark:text-red-400">
+                    <button type="button" wire:click="$set('confirmingVarietyDelete', true)" class="px-3.5 py-1.5 rounded-xl bg-dex-delete-bg text-dex-delete-text">
                         {{ __('Delete variety') }}
                     </button>
                 </div>
 
                 @if ($confirmingVarietyDelete)
-                    <div class="rounded-lg border border-red-300 dark:border-red-800 p-4 space-y-3">
-                        <p class="text-sm">{{ __('Delete this variety? Your catch of it will be deleted too. This cannot be undone.') }}</p>
-                        <div class="flex gap-3">
-                            <button type="button" wire:click="deleteVariety" class="px-3 py-1.5 rounded-lg bg-red-600 text-white text-sm">
+                    <div class="rounded-xl bg-dex-surface p-4 space-y-3">
+                        <p class="text-sm text-dex-label">{{ __('Delete this variety? Your catch of it will be deleted too. This cannot be undone.') }}</p>
+                        <div class="flex gap-3 text-sm font-bold">
+                            <button type="button" wire:click="deleteVariety" class="px-3 py-1.5 rounded-lg bg-dex-delete-bg text-dex-delete-text">
                                 {{ __('Yes, delete') }}
                             </button>
-                            <button type="button" wire:click="$set('confirmingVarietyDelete', false)" class="px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-700 text-sm">
+                            <button type="button" wire:click="$set('confirmingVarietyDelete', false)" class="px-3 py-1.5 rounded-lg bg-dex-card text-dex-label">
                                 {{ __('Cancel') }}
                             </button>
                         </div>
@@ -263,28 +265,28 @@ new #[Layout('layouts.dex')] class extends Component
             @else
                 <form wire:submit="updateVariety" class="space-y-3">
                     <div>
-                        <label class="block text-xs text-gray-500 mb-1">{{ __('Name') }}</label>
-                        <input type="text" wire:model="varietyName" class="w-full rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-800">
-                        @error('varietyName') <p class="text-sm text-red-600 mt-1">{{ $message }}</p> @enderror
+                        <label class="block text-xs font-bold text-dex-label mb-1.5">{{ __('Name') }}</label>
+                        <input type="text" wire:model="varietyName" class="w-full rounded-xl border-0 bg-dex-card text-dex-text text-sm focus:ring-2 focus:ring-dex-gold">
+                        @error('varietyName') <p class="text-sm text-dex-delete-text mt-1">{{ $message }}</p> @enderror
                     </div>
                     <div>
-                        <label class="block text-xs text-gray-500 mb-1">{{ __('Origin (optional)') }}</label>
-                        <input type="text" wire:model="varietyOrigin" class="w-full rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-800">
-                        @error('varietyOrigin') <p class="text-sm text-red-600 mt-1">{{ $message }}</p> @enderror
+                        <label class="block text-xs font-bold text-dex-label mb-1.5">{{ __('Origin (optional)') }}</label>
+                        <input type="text" wire:model="varietyOrigin" class="w-full rounded-xl border-0 bg-dex-card text-dex-text text-sm focus:ring-2 focus:ring-dex-gold">
+                        @error('varietyOrigin') <p class="text-sm text-dex-delete-text mt-1">{{ $message }}</p> @enderror
                     </div>
                     <div>
-                        <label class="block text-xs text-gray-500 mb-1">{{ __('Reference photo (optional)') }}</label>
-                        <input type="file" wire:model="varietyReferencePhoto" accept="image/*" class="w-full text-sm">
+                        <label class="block text-xs font-bold text-dex-label mb-1.5">{{ __('Reference photo (optional)') }}</label>
+                        <input type="file" wire:model="varietyReferencePhoto" accept="image/*" class="w-full text-sm text-dex-label">
                         @if ($varietyReferencePhoto)
-                            <img src="{{ $varietyReferencePhoto->temporaryUrl() }}" class="mt-2 h-24 w-24 object-cover rounded-lg">
+                            <img src="{{ $varietyReferencePhoto->temporaryUrl() }}" class="mt-2 h-24 w-24 object-cover rounded-[14px] shadow-[0_4px_0_#10150a]">
                         @endif
-                        @error('varietyReferencePhoto') <p class="text-sm text-red-600 mt-1">{{ $message }}</p> @enderror
+                        @error('varietyReferencePhoto') <p class="text-sm text-dex-delete-text mt-1">{{ $message }}</p> @enderror
                     </div>
-                    <div class="flex gap-3">
-                        <button type="submit" class="px-3 py-1.5 rounded-lg bg-green-600 text-white text-sm">
+                    <div class="flex gap-3 text-sm font-bold">
+                        <button type="submit" class="px-3.5 py-1.5 rounded-xl bg-dex-gold text-dex-gold-ink shadow-[0_3px_0_#a8891f]">
                             {{ __('Save') }}
                         </button>
-                        <button type="button" wire:click="cancelEditingVariety" class="px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-700 text-sm">
+                        <button type="button" wire:click="cancelEditingVariety" class="px-3.5 py-1.5 rounded-xl bg-dex-card text-dex-label">
                             {{ __('Cancel') }}
                         </button>
                     </div>
