@@ -174,13 +174,9 @@ new #[Layout('layouts.dex')] class extends Component
                                 href="{{ route('varieties.show', $variety) }}"
                                 wire:navigate
                                 wire:key="variety-{{ $variety->id }}"
-                                class="block relative rounded-2xl overflow-hidden anim-fade-in bg-dex-card shadow-[0_4px_0_#171d10] {{ $rotation }}"
+                                class="block rounded-2xl overflow-hidden anim-fade-in bg-dex-card shadow-[0_4px_0_#171d10] {{ $rotation }} {{ $catch->is_favorite ? 'border-2 border-dex-gold' : '' }}"
                                 style="animation-delay: {{ $delay }}s"
                             >
-                                @if ($catch->is_favorite)
-                                    <x-star-icon filled class="absolute top-1.5 right-1.5 z-10 drop-shadow" :size="16" />
-                                @endif
-
                                 <div class="aspect-[4/3] bg-cover bg-center bg-dex-surface" @if ($photoUrl) style="background-image: url('{{ $photoUrl }}')" @endif>
                                     @unless ($photoUrl)
                                         <div class="w-full h-full flex items-center justify-center text-3xl">🍎</div>
