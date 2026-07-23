@@ -55,6 +55,12 @@ new #[Layout('layouts.dex')] class extends Component
         return $this->variety->user_id === Auth::id();
     }
 
+    #[Computed]
+    public function googleSearchUrl(): string
+    {
+        return 'https://www.google.com/search?hl=de&q='.urlencode($this->variety->name.' apfel');
+    }
+
     public function startEditingVariety(): void
     {
         $this->authorize('update', $this->variety);
@@ -159,6 +165,9 @@ new #[Layout('layouts.dex')] class extends Component
             @if ($variety->origin)
                 <p class="text-dex-meta text-[13px] mt-0.5">{{ $variety->origin }}</p>
             @endif
+            <a href="{{ $this->googleSearchUrl }}" target="_blank" rel="noopener" class="text-dex-gold text-[13px] font-bold underline underline-offset-4">
+                {{ __('More info') }} &rarr;
+            </a>
         </div>
 
         <div class="space-y-1 text-[13px] text-dex-label bg-dex-surface rounded-xl px-3.5 py-3">
@@ -226,6 +235,9 @@ new #[Layout('layouts.dex')] class extends Component
             @if ($variety->origin)
                 <p class="text-dex-meta text-[13px] mt-0.5">{{ $variety->origin }}</p>
             @endif
+            <a href="{{ $this->googleSearchUrl }}" target="_blank" rel="noopener" class="text-dex-gold text-[13px] font-bold underline underline-offset-4">
+                {{ __('More info') }} &rarr;
+            </a>
         </div>
 
         <a
