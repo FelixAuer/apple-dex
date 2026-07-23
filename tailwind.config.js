@@ -24,6 +24,7 @@ export default {
                     text: '#f4ede1',
                     label: '#dde2c9',
                     meta: '#b7c19c',
+                    date: '#9aa384',
                     warm: '#f0d9a8',
                     red: '#e8543f',
                     'red-btn': '#f2634c',

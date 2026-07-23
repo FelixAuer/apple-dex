@@ -146,13 +146,11 @@ new #[Layout('layouts.dex')] class extends Component
 }; ?>
 
 <div class="px-4 py-5 max-w-lg mx-auto space-y-5">
-    <a href="{{ route('dex') }}" wire:navigate class="inline-block text-sm font-bold text-dex-gold">&larr; {{ __('Back to Dex') }}</a>
-
     @if ($this->catch)
         {{-- Caught state --}}
         @php $photoUrl = $this->catch->getFirstMediaUrl('photo', 'display'); @endphp
 
-        <div class="rounded-[18px] overflow-hidden bg-dex-surface aspect-square flex items-center justify-center shadow-[0_6px_0_#10150a]">
+        <div class="rounded-[18px] overflow-hidden bg-dex-surface aspect-square flex items-center justify-center {{ $photoUrl ? 'shadow-[0_6px_0_#10150a,0_26px_40px_-14px_rgba(165,57,43,0.5)]' : 'shadow-[0_6px_0_#10150a]' }}">
             @if ($photoUrl)
                 <img src="{{ $photoUrl }}" class="w-full h-full object-cover">
             @else
@@ -162,38 +160,44 @@ new #[Layout('layouts.dex')] class extends Component
 
         <div>
             <h1 class="font-display font-bold text-2xl text-dex-text">{{ $variety->name }}</h1>
-            @if ($variety->origin)
-                <p class="text-dex-meta text-[13px] mt-0.5">{{ $variety->origin }}</p>
-            @endif
-            <a href="{{ $this->googleSearchUrl }}" target="_blank" rel="noopener" class="text-dex-gold text-[13px] font-bold underline underline-offset-4">
-                {{ __('More info') }} &rarr;
-            </a>
-        </div>
-
-        <div class="space-y-1 text-[13px] text-dex-label bg-dex-surface rounded-xl px-3.5 py-3">
-            <p>{{ Str::ucfirst($eatenWord) }}: {{ $this->catch->caught_at->format('d.m.Y') }}</p>
-
-            @if ($this->catch->location_label)
-                <p>{{ __('Location') }}: {{ $this->catch->location_label }}</p>
-            @endif
-
-            @if ($this->catch->lat && $this->catch->lng)
-                <p>
-                    <a
-                        href="https://www.openstreetmap.org/?mlat={{ $this->catch->lat }}&mlon={{ $this->catch->lng }}#map=16/{{ $this->catch->lat }}/{{ $this->catch->lng }}"
-                        target="_blank"
-                        rel="noopener"
-                        class="text-dex-gold font-bold underline underline-offset-4"
-                    >
-                        {{ __('View on OpenStreetMap') }} &rarr;
-                    </a>
-                </p>
-            @endif
+            <div class="flex items-center gap-2 flex-wrap mt-1">
+                @if ($variety->origin)
+                    <span class="text-dex-meta text-[13px]">{{ $variety->origin }}</span>
+                    <span class="text-dex-meta/40">&middot;</span>
+                @endif
+                <a href="{{ $this->googleSearchUrl }}" target="_blank" rel="noopener" class="font-bold text-[12.5px] text-dex-gold underline underline-offset-[3px]">
+                    {{ __('More info') }}
+                </a>
+                <span class="text-dex-meta/40">&middot;</span>
+            </div>
         </div>
 
         @if ($this->catch->notes)
-            <p class="text-sm text-dex-label whitespace-pre-line">{{ $this->catch->notes }}</p>
+            <div class="pl-3.5 border-l-[3px] border-dex-gold">
+                <p class="font-display font-semibold text-base text-dex-text leading-relaxed whitespace-pre-line">&ldquo;{{ $this->catch->notes }}&rdquo;</p>
+            </div>
         @endif
+
+        <div class="flex items-center justify-between">
+            <span class="text-dex-date text-[12.5px]">
+                {{ Str::ucfirst($eatenWord) }} {{ $this->catch->caught_at->format('d.m.Y') }}
+                @if ($this->catch->location_label)
+                    &middot; {{ $this->catch->location_label }}
+                @endif
+            </span>
+
+            @if ($this->catch->lat && $this->catch->lng)
+                <a
+                    href="https://www.openstreetmap.org/?mlat={{ $this->catch->lat }}&mlon={{ $this->catch->lng }}#map=16/{{ $this->catch->lat }}/{{ $this->catch->lng }}"
+                    target="_blank"
+                    rel="noopener"
+                    class="text-dex-gold text-sm"
+                    aria-label="{{ __('View on map') }}"
+                >
+                    📍
+                </a>
+            @endif
+        </div>
 
         <div class="flex gap-2.5 text-[13px] font-bold">
             <a href="{{ route('catch.new', ['catch' => $this->catch->id]) }}" wire:navigate class="flex-1 text-center py-2.5 rounded-[14px] bg-dex-card text-dex-text shadow-[0_3px_0_#171d10]">
@@ -222,7 +226,7 @@ new #[Layout('layouts.dex')] class extends Component
         {{-- Uncaught state --}}
         @php $refUrl = $variety->getFirstMediaUrl('reference_photo', 'display'); @endphp
 
-        <div class="rounded-[18px] overflow-hidden bg-dex-dim aspect-square flex items-center justify-center shadow-[0_6px_0_#10150a]">
+        <div class="rounded-[18px] overflow-hidden bg-dex-dim aspect-square flex items-center justify-center {{ $refUrl ? 'shadow-[0_6px_0_#10150a,0_26px_40px_-14px_rgba(165,57,43,0.5)]' : 'shadow-[0_6px_0_#10150a]' }}">
             @if ($refUrl)
                 <img src="{{ $refUrl }}" class="w-full h-full object-cover grayscale opacity-75">
             @else
@@ -232,12 +236,16 @@ new #[Layout('layouts.dex')] class extends Component
 
         <div>
             <h1 class="font-display font-bold text-2xl text-dex-text">{{ $variety->name }}</h1>
-            @if ($variety->origin)
-                <p class="text-dex-meta text-[13px] mt-0.5">{{ $variety->origin }}</p>
-            @endif
-            <a href="{{ $this->googleSearchUrl }}" target="_blank" rel="noopener" class="text-dex-gold text-[13px] font-bold underline underline-offset-4">
-                {{ __('More info') }} &rarr;
-            </a>
+            <div class="flex items-center gap-2 flex-wrap mt-1">
+                @if ($variety->origin)
+                    <span class="text-dex-meta text-[13px]">{{ $variety->origin }}</span>
+                    <span class="text-dex-meta/40">&middot;</span>
+                @endif
+                <a href="{{ $this->googleSearchUrl }}" target="_blank" rel="noopener" class="font-bold text-[12.5px] text-dex-gold underline underline-offset-[3px]">
+                    {{ __('More info') }}
+                </a>
+                <span class="text-dex-meta/40">&middot;</span>
+            </div>
         </div>
 
         <a
