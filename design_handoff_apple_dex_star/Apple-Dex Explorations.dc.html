@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600&family=Work+Sans:wght@400;500;600&family=Baloo+2:wght@600;700&family=Nunito+Sans:wght@400;600;700&family=Caveat:wght@600&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#f0ede6; font-family:'Work Sans',sans-serif; }
+  .badge { position:absolute; top:0; left:20px; background:#1e2419; color:#f4ede1; font-size:13px; font-weight:700; padding:4px 12px; border-radius:20px; font-family:'Work Sans',sans-serif; letter-spacing:.02em; z-index:2; box-shadow:0 4px 10px rgba(0,0,0,0.25); }
+  @keyframes fadeRise { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  @keyframes fadeInDim { from { opacity:0; } to { opacity:0.75; } }
+  .fr { animation:fadeRise .5s ease both; }
+  .fi { animation:fadeIn .5s ease both; }
+  .fid { animation:fadeInDim .5s ease both; }
+</style>
+</helmet>
+
+<section style="padding:60px 40px 40px; display:flex; flex-direction:column; gap:24px;">
+  <div>
+    <div style="font-size:13px; text-transform:uppercase; letter-spacing:.12em; color:#8a8677; font-weight:600;">Turn 4</div>
+    <h1 style="font-family:'Baloo 2',sans-serif; font-size:28px; margin:6px 0 0; color:#2a2a24;">Link treatments, on 3b</h1>
+    <p style="color:#6b6a5e; font-size:15px; max-width:640px; margin:8px 0 0;">Variations on "More info" and "View on map" only — rest of 3b unchanged. Reference with 4a / 4b / 4c.</p>
+  </div>
+
+  <div style="display:flex; gap:40px; flex-wrap:wrap; align-items:flex-start;">
+
+    <!-- 4a: Icon chip links -->
+    <div id="4a" style="position:relative; width:380px; padding-top:14px;">
+      <div class="badge" style="background:#e8543f;">4a — Icons + text, inline</div>
+      <div style="border-radius:24px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.2); background:#1e2419; position:relative;">
+        <div style="position:absolute; inset:0; pointer-events:none; opacity:0.5; mix-blend-mode:overlay; background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>&quot;);"></div>
+        <div style="background:#232b1c; padding:18px 22px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:28px;height:28px;border-radius:8px;background:#e8543f;display:flex;align-items:center;justify-content:center; box-shadow:0 3px 0 #a5392b;">
+              <div style="position:relative; width:14px; height:14px;">
+                <div style="position:absolute; width:11px; height:11px; border-radius:50%; background:#f4ede1; bottom:0; left:1px;"></div>
+                <div style="position:absolute; width:5px; height:3px; border-radius:0 60% 0 60%; background:#e0c14c; top:0; right:1px; transform:rotate(20deg);"></div>
+              </div>
+            </div>
+            <span style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:17px; color:#f4ede1;">Apple-Dex</span>
+          </div>
+        </div>
+        <div style="padding:16px 22px 24px;">
+          <div style="border-radius:18px; overflow:hidden; box-shadow:0 6px 0 #10150a, 0 26px 40px -14px rgba(165,57,43,0.5);">
+            <div style="height:220px; background:linear-gradient(160deg,#e8735f,#a5392b);"></div>
+          </div>
+          <div style="margin-top:16px;">
+            <div style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:26px; color:#f4ede1;">Gala</div>
+            <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+              <span style="font-family:'Nunito Sans',sans-serif; font-size:13px; color:#b7c19c;">New Zealand, 1930s</span>
+              <span style="color:#4a563a;">·</span>
+              <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:12.5px; color:#e0c14c;"><span style="font-size:12px;">ℹ️</span>More info</span>
+            </div>
+          </div>
+
+          <div style="margin-top:20px; padding-left:14px; border-left:3px solid #e0c14c;">
+            <div style="font-family:'Baloo 2',sans-serif; font-size:16px; color:#f4ede1; line-height:1.5; font-weight:600;">"Schöner Kontrast zwischen Schale und Fleisch. Ausgewogener Geschmack."</div>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-top:22px;">
+            <span style="font-family:'Nunito Sans',sans-serif; font-size:12.5px; color:#9aa384;">Scoffed 16.07.2026</span>
+            <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:12.5px; color:#e0c14c;"><span style="font-size:12px;">📍</span>Map</span>
+          </div>
+
+          <div style="display:flex; gap:10px; margin-top:20px;">
+            <div style="flex:1; text-align:center; padding:10px; border-radius:14px; background:#3a4530; color:#f4ede1; font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:13px; box-shadow:0 3px 0 #171d10;">Edit entry</div>
+            <div style="flex:1; text-align:center; padding:10px; border-radius:14px; background:#4a2b21; color:#ff8f7d; font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:13px; box-shadow:0 3px 0 #241511;">Delete entry</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4b: Underlined text inline, no arrows -->
+    <div id="4b" style="position:relative; width:380px; padding-top:14px;">
+      <div class="badge" style="background:#e8543f;">4b — Inline underline</div>
+      <div style="border-radius:24px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.2); background:#1e2419; position:relative;">
+        <div style="position:absolute; inset:0; pointer-events:none; opacity:0.5; mix-blend-mode:overlay; background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>&quot;);"></div>
+        <div style="background:#232b1c; padding:18px 22px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:28px;height:28px;border-radius:8px;background:#e8543f;display:flex;align-items:center;justify-content:center; box-shadow:0 3px 0 #a5392b;">
+              <div style="position:relative; width:14px; height:14px;">
+                <div style="position:absolute; width:11px; height:11px; border-radius:50%; background:#f4ede1; bottom:0; left:1px;"></div>
+                <div style="position:absolute; width:5px; height:3px; border-radius:0 60% 0 60%; background:#e0c14c; top:0; right:1px; transform:rotate(20deg);"></div>
+              </div>
+            </div>
+            <span style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:17px; color:#f4ede1;">Apple-Dex</span>
+          </div>
+        </div>
+        <div style="padding:16px 22px 24px;">
+          <div style="border-radius:18px; overflow:hidden; box-shadow:0 6px 0 #10150a, 0 26px 40px -14px rgba(165,57,43,0.5);">
+            <div style="height:220px; background:linear-gradient(160deg,#e8735f,#a5392b);"></div>
+          </div>
+          <div style="margin-top:16px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+              <div style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:26px; color:#f4ede1;">Gala</div>
+              <div style="display:flex; align-items:center; gap:6px; flex-shrink:0;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8a9270" stroke-width="1.5" stroke-linejoin="round">
+                  <path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.6 6.9L12 17.6 5.8 21.2l1.6-6.9L2.1 9.6l7-.7z"/>
+                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#e0c14c" stroke="#e0c14c" stroke-width="1.5" stroke-linejoin="round">
+                  <path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.6 6.9L12 17.6 5.8 21.2l1.6-6.9L2.1 9.6l7-.7z"/>
+                </svg>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; margin-top:4px; flex-wrap:wrap;">
+              <span style="font-family:'Nunito Sans',sans-serif; font-size:13px; color:#b7c19c;">New Zealand, 1930s</span>
+              <span style="color:#4a563a;">·</span>
+              <span style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:12.5px; color:#e0c14c; text-decoration:underline; text-underline-offset:3px;">More info</span>
+            </div>
+          </div>
+
+          <div style="margin-top:20px; padding-left:14px; border-left:3px solid #e0c14c;">
+            <div style="font-family:'Baloo 2',sans-serif; font-size:16px; color:#f4ede1; line-height:1.5; font-weight:600;">"Schöner Kontrast zwischen Schale und Fleisch. Ausgewogener Geschmack."</div>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-top:22px;">
+            <span style="font-family:'Nunito Sans',sans-serif; font-size:12.5px; color:#9aa384;">Scoffed 16.07.2026</span>
+            <span style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:14px; color:#e0c14c;">📍</span>
+          </div>
+
+          <div style="display:flex; gap:10px; margin-top:20px;">
+            <div style="flex:1; text-align:center; padding:10px; border-radius:14px; background:#3a4530; color:#f4ede1; font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:13px; box-shadow:0 3px 0 #171d10;">Edit entry</div>
+            <div style="flex:1; text-align:center; padding:10px; border-radius:14px; background:#4a2b21; color:#ff8f7d; font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:13px; box-shadow:0 3px 0 #241511;">Delete entry</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4c: Trailing icon buttons, bottom-anchored -->
+    <div id="4c" style="position:relative; width:380px; padding-top:14px;">
+      <div class="badge" style="background:#e8543f;">4c — Icons only</div>
+      <div style="border-radius:24px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.2); background:#1e2419; position:relative;">
+        <div style="position:absolute; inset:0; pointer-events:none; opacity:0.5; mix-blend-mode:overlay; background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>&quot;);"></div>
+        <div style="background:#232b1c; padding:18px 22px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:28px;height:28px;border-radius:8px;background:#e8543f;display:flex;align-items:center;justify-content:center; box-shadow:0 3px 0 #a5392b;">
+              <div style="position:relative; width:14px; height:14px;">
+                <div style="position:absolute; width:11px; height:11px; border-radius:50%; background:#f4ede1; bottom:0; left:1px;"></div>
+                <div style="position:absolute; width:5px; height:3px; border-radius:0 60% 0 60%; background:#e0c14c; top:0; right:1px; transform:rotate(20deg);"></div>
+              </div>
+            </div>
+            <span style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:17px; color:#f4ede1;">Apple-Dex</span>
+          </div>
+        </div>
+        <div style="padding:16px 22px 24px;">
+          <div style="border-radius:18px; overflow:hidden; box-shadow:0 6px 0 #10150a, 0 26px 40px -14px rgba(165,57,43,0.5);">
+            <div style="height:220px; background:linear-gradient(160deg,#e8735f,#a5392b);"></div>
+          </div>
+          <div style="margin-top:16px;">
+            <div style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:26px; color:#f4ede1;">Gala</div>
+            <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+              <span style="font-family:'Nunito Sans',sans-serif; font-size:13px; color:#b7c19c;">New Zealand, 1930s</span>
+              <span style="color:#4a563a;">·</span>
+              <span style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:12.5px; color:#e0c14c;">ℹ️</span>
+            </div>
+          </div>
+
+          <div style="margin-top:20px; padding-left:14px; border-left:3px solid #e0c14c;">
+            <div style="font-family:'Baloo 2',sans-serif; font-size:16px; color:#f4ede1; line-height:1.5; font-weight:600;">"Schöner Kontrast zwischen Schale und Fleisch. Ausgewogener Geschmack."</div>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-top:22px;">
+            <span style="font-family:'Nunito Sans',sans-serif; font-size:12.5px; color:#9aa384;">Scoffed 16.07.2026</span>
+            <span style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:12.5px; color:#e0c14c;">📍</span>
+          </div>
+
+          <div style="display:flex; gap:10px; margin-top:20px;">
+            <div style="flex:1; text-align:center; padding:10px; border-radius:14px; background:#3a4530; color:#f4ede1; font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:13px; box-shadow:0 3px 0 #171d10;">Edit entry</div>
+            <div style="flex:1; text-align:center; padding:10px; border-radius:14px; background:#4a2b21; color:#ff8f7d; font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:13px; box-shadow:0 3px 0 #241511;">Delete entry</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section style="padding:60px 40px 40px; display:flex; flex-direction:column; gap:24px;">
+  <div>
+    <div style="font-size:13px; text-transform:uppercase; letter-spacing:.12em; color:#8a8677; font-weight:600;">Turn 3</div>
+    <h1 style="font-family:'Baloo 2',sans-serif; font-size:28px; margin:6px 0 0; color:#2a2a24;">Detail page, without cards</h1>
+    <p style="color:#6b6a5e; font-size:15px; max-width:640px; margin:8px 0 0;">Same content, no boxed panels — hierarchy carried by type, rules, and spacing. Reference with 3a / 3b / 3c.</p>
+  </div>
+
+  <div style="display:flex; gap:40px; flex-wrap:wrap; align-items:flex-start;">
+
+    <!-- 3a: Rule-divided, generous whitespace -->
+    <div id="3a" style="position:relative; width:380px; padding-top:14px;">
+      <div class="badge" style="background:#e8543f;">3a — Rule-divided</div>
+      <div style="border-radius:24px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.2); background:#1e2419; position:relative;">
+        <div style="position:absolute; inset:0; pointer-events:none; opacity:0.5; mix-blend-mode:overlay; background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>&quot;);"></div>
+        <div style="background:#232b1c; padding:18px 22px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:28px;height:28px;border-radius:8px;background:#e8543f;display:flex;align-items:center;justify-content:center; box-shadow:0 3px 0 #a5392b;">
+              <div style="position:relative; width:14px; height:14px;">
+                <div style="position:absolute; width:11px; height:11px; border-radius:50%; background:#f4ede1; bottom:0; left:1px;"></div>
+                <div style="position:absolute; width:5px; height:3px; border-radius:0 60% 0 60%; background:#e0c14c; top:0; right:1px; transform:rotate(20deg);"></div>
+              </div>
+            </div>
+            <span style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:17px; color:#f4ede1;">Apple-Dex</span>
+          </div>
+        </div>
+        <div style="padding:16px 22px 24px;">
+          <div style="border-radius:18px; overflow:hidden; box-shadow:0 6px 0 #10150a, 0 26px 40px -14px rgba(165,57,43,0.5);">
+            <div style="height:220px; background:linear-gradient(160deg,#e8735f,#a5392b);"></div>
+          </div>
+          <div style="display:flex; align-items:baseline; justify-content:space-between; margin-top:16px;">
+            <div style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:24px; color:#f4ede1;">Gala</div>
+            <div style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:12.5px; color:#e0c14c;">More info →</div>
+          </div>
+          <div style="font-family:'Nunito Sans',sans-serif; font-size:13px; color:#b7c19c; margin-top:2px;">New Zealand, 1930s</div>
+
+          <div style="height:1px; background:#333d28; margin:18px 0;"></div>
+
+          <div style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:#8a9270;">Your notes</div>
+          <div style="font-family:'Nunito Sans',sans-serif; font-size:13.5px; color:#dde2c9; margin-top:8px; line-height:1.6;">Schöner Kontrast zwischen Schale und Fleisch. Ausgewogener Geschmack.</div>
+
+          <div style="height:1px; background:#333d28; margin:18px 0;"></div>
+
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span style="font-size:14px;">📅</span>
+            <span style="font-family:'Nunito Sans',sans-serif; font-size:13px; color:#dde2c9;">Scoffed 16.07.2026</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+            <span style="font-size:14px;">📍</span>
+            <span style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:13px; color:#e0c14c;">View on OpenStreetMap →</span>
+          </div>
+
+          <div style="display:flex; gap:10px; margin-top:22px;">
+            <div style="flex:1; text-align:center; padding:10px; border-radius:14px; background:#3a4530; color:#f4ede1; font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:13px; box-shadow:0 3px 0 #171d10;">Edit entry</div>
+            <div style="flex:1; text-align:center; padding:10px; border-radius:14px; background:#4a2b21; color:#ff8f7d; font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:13px; box-shadow:0 3px 0 #241511;">Delete entry</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3b: Editorial / magazine, pull-quote notes -->
+    <div id="3b" style="position:relative; width:380px; padding-top:14px;">
+      <div class="badge" style="background:#e8543f;">3b — Editorial</div>
+      <div style="border-radius:24px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.2); background:#1e2419; position:relative;">
+        <div style="position:absolute; inset:0; pointer-events:none; opacity:0.5; mix-blend-mode:overlay; background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>&quot;);"></div>
+        <div style="background:#232b1c; padding:18px 22px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:28px;height:28px;border-radius:8px;background:#e8543f;display:flex;align-items:center;justify-content:center; box-shadow:0 3px 0 #a5392b;">
+              <div style="position:relative; width:14px; height:14px;">
+                <div style="position:absolute; width:11px; height:11px; border-radius:50%; background:#f4ede1; bottom:0; left:1px;"></div>
+                <div style="position:absolute; width:5px; height:3px; border-radius:0 60% 0 60%; background:#e0c14c; top:0; right:1px; transform:rotate(20deg);"></div>
+              </div>
+            </div>
+            <span style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:17px; color:#f4ede1;">Apple-Dex</span>
+          </div>
+        </div>
+        <div style="padding:16px 22px 24px;">
+          <div style="border-radius:18px; overflow:hidden; box-shadow:0 6px 0 #10150a, 0 26px 40px -14px rgba(165,57,43,0.5);">
+            <div style="height:220px; background:linear-gradient(160deg,#e8735f,#a5392b);"></div>
+          </div>
+          <div style="margin-top:16px;">
+            <div style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:26px; color:#f4ede1;">Gala</div>
+            <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+              <span style="font-family:'Nunito Sans',sans-serif; font-size:13px; color:#b7c19c;">New Zealand, 1930s</span>
+              <span style="color:#4a563a;">·</span>
+              <span style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:12.5px; color:#e0c14c;">More info →</span>
+            </div>
+          </div>
+
+          <div style="margin-top:20px; padding-left:14px; border-left:3px solid #e0c14c;">
+            <div style="font-family:'Baloo 2',sans-serif; font-size:16px; color:#f4ede1; line-height:1.5; font-weight:600;">"Schöner Kontrast zwischen Schale und Fleisch. Ausgewogener Geschmack."</div>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-top:22px; font-family:'Nunito Sans',sans-serif; font-size:12.5px;">
+            <span style="color:#9aa384;">Scoffed 16.07.2026</span>
+            <span style="font-weight:700; color:#e0c14c;">View on map →</span>
+          </div>
+
+          <div style="display:flex; gap:10px; margin-top:20px;">
+            <div style="flex:1; text-align:center; padding:10px; border-radius:14px; background:#3a4530; color:#f4ede1; font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:13px; box-shadow:0 3px 0 #171d10;">Edit entry</div>
+            <div style="flex:1; text-align:center; padding:10px; border-radius:14px; background:#4a2b21; color:#ff8f7d; font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:13px; box-shadow:0 3px 0 #241511;">Delete entry</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3c: Minimal label list -->
+    <div id="3c" style="position:relative; width:380px; padding-top:14px;">
+      <div class="badge" style="background:#e8543f;">3c — Minimal label list</div>
+      <div style="border-radius:24px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.2); background:#1e2419; position:relative;">
+        <div style="position:absolute; inset:0; pointer-events:none; opacity:0.5; mix-blend-mode:overlay; background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>&quot;);"></div>
+        <div style="background:#232b1c; padding:18px 22px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:28px;height:28px;border-radius:8px;background:#e8543f;display:flex;align-items:center;justify-content:center; box-shadow:0 3px 0 #a5392b;">
+              <div style="position:relative; width:14px; height:14px;">
+                <div style="position:absolute; width:11px; height:11px; border-radius:50%; background:#f4ede1; bottom:0; left:1px;"></div>
+                <div style="position:absolute; width:5px; height:3px; border-radius:0 60% 0 60%; background:#e0c14c; top:0; right:1px; transform:rotate(20deg);"></div>
+              </div>
+            </div>
+            <span style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:17px; color:#f4ede1;">Apple-Dex</span>
+          </div>
+        </div>
+        <div style="padding:16px 22px 24px;">
+          <div style="border-radius:18px; overflow:hidden; box-shadow:0 6px 0 #10150a, 0 26px 40px -14px rgba(165,57,43,0.5);">
+            <div style="height:220px; background:linear-gradient(160deg,#e8735f,#a5392b);"></div>
+          </div>
+          <div style="display:flex; align-items:baseline; justify-content:space-between; margin-top:16px;">
+            <div style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:24px; color:#f4ede1;">Gala</div>
+            <div style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:12.5px; color:#e0c14c;">More info →</div>
+          </div>
+          <div style="font-family:'Nunito Sans',sans-serif; font-size:13px; color:#b7c19c; margin-top:2px;">New Zealand, 1930s</div>
+
+          <div style="margin-top:24px; display:flex; flex-direction:column; gap:16px;">
+            <div>
+              <div style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:#7c8567;">Notes</div>
+              <div style="font-family:'Nunito Sans',sans-serif; font-size:13.5px; color:#dde2c9; margin-top:4px; line-height:1.55;">Schöner Kontrast zwischen Schale und Fleisch. Ausgewogener Geschmack.</div>
+            </div>
+            <div>
+              <div style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:#7c8567;">Scoffed</div>
+              <div style="font-family:'Nunito Sans',sans-serif; font-size:13.5px; color:#dde2c9; margin-top:4px;">16.07.2026</div>
+            </div>
+            <div>
+              <div style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:#7c8567;">Location</div>
+              <div style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:13.5px; color:#e0c14c; margin-top:4px;">View on OpenStreetMap →</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:10px; margin-top:24px;">
+            <div style="flex:1; text-align:center; padding:10px; border-radius:14px; background:#3a4530; color:#f4ede1; font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:13px; box-shadow:0 3px 0 #171d10;">Edit entry</div>
+            <div style="flex:1; text-align:center; padding:10px; border-radius:14px; background:#4a2b21; color:#ff8f7d; font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:13px; box-shadow:0 3px 0 #241511;">Delete entry</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section style="padding:60px 40px 40px; display:flex; flex-direction:column; gap:24px;">
+  <div>
+    <div style="font-size:13px; text-transform:uppercase; letter-spacing:.12em; color:#8a8677; font-weight:600;">Turn 2</div>
+    <h1 style="font-family:'Baloo 2',sans-serif; font-size:28px; margin:6px 0 0; color:#2a2a24;">Building out 1b — Collector's Game</h1>
+    <p style="color:#6b6a5e; font-size:15px; max-width:640px; margin:8px 0 0;">Detail pages and the log-a-catch flow, carried through in the same style. Reference with 2a / 2b / 2c.</p>
+  </div>
+
+  <div style="display:flex; gap:40px; flex-wrap:wrap; align-items:flex-start;">
+
+    <!-- 2a: Caught detail -->
+    <div id="2a" style="position:relative; width:380px; padding-top:14px;">
+      <div class="badge" style="background:#e8543f;">2a — Caught detail</div>
+      <div style="border-radius:24px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.2); background:#1e2419; position:relative;">
+      <div style="position:absolute; inset:0; pointer-events:none; opacity:0.5; mix-blend-mode:overlay; background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>&quot;);"></div>
+        <div style="background:#232b1c; padding:18px 22px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:28px;height:28px;border-radius:8px;background:#e8543f;display:flex;align-items:center;justify-content:center; box-shadow:0 3px 0 #a5392b;">
+              <div style="position:relative; width:14px; height:14px;">
+                <div style="position:absolute; width:11px; height:11px; border-radius:50%; background:#f4ede1; bottom:0; left:1px;"></div>
+                <div style="position:absolute; width:5px; height:3px; border-radius:0 60% 0 60%; background:#e0c14c; top:0; right:1px; transform:rotate(20deg);"></div>
+              </div>
+            </div>
+            <span style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:17px; color:#f4ede1;">Apple-Dex</span>
+          </div>
+        </div>
+        <div style="padding:16px 22px 22px;">
+          <div style="border-radius:18px; overflow:hidden; box-shadow:0 6px 0 #10150a, 0 26px 40px -14px rgba(165,57,43,0.5);">
+            <div style="height:220px; background:linear-gradient(160deg,#e8735f,#a5392b);"></div>
+          </div>
+          <div style="display:flex; align-items:baseline; justify-content:space-between; margin-top:14px;">
+            <div style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:24px; color:#f4ede1;">Gala</div>
+            <div style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:12.5px; color:#e0c14c;">More info →</div>
+          </div>
+          <div style="font-family:'Nunito Sans',sans-serif; font-size:13px; color:#b7c19c; margin-top:2px;">New Zealand, 1930s</div>
+
+          <div style="margin-top:16px; background:#232b1c; border-radius:14px; padding:14px 16px;">
+            <div style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:#8a9270;">Your notes</div>
+            <div style="font-family:'Nunito Sans',sans-serif; font-size:13.5px; color:#dde2c9; margin-top:6px; line-height:1.5;">Schöner Kontrast zwischen Schale und Fleisch. Ausgewogener Geschmack.</div>
+          </div>
+
+          <div style="margin-top:12px; background:#232b1c; border-radius:14px; overflow:hidden;">
+            <div style="display:flex; align-items:center; gap:10px; padding:12px 16px;">
+              <span style="font-size:14px;">📅</span>
+              <span style="font-family:'Nunito Sans',sans-serif; font-size:13px; color:#dde2c9;">Scoffed 16.07.2026</span>
+            </div>
+            <div style="height:1px; background:#2e3624;"></div>
+            <div style="display:flex; align-items:center; gap:10px; padding:12px 16px;">
+              <span style="font-size:14px;">📍</span>
+              <span style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:13px; color:#e0c14c;">View on OpenStreetMap →</span>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:10px; margin-top:16px;">
+            <div style="flex:1; text-align:center; padding:10px; border-radius:14px; background:#3a4530; color:#f4ede1; font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:13px; box-shadow:0 3px 0 #171d10;">Edit entry</div>
+            <div style="flex:1; text-align:center; padding:10px; border-radius:14px; background:#4a2b21; color:#ff8f7d; font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:13px; box-shadow:0 3px 0 #241511;">Delete entry</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2b: Uncaught detail -->
+    <div id="2b" style="position:relative; width:380px; padding-top:14px;">
+      <div class="badge" style="background:#e8543f;">2b — Uncaught detail</div>
+      <div style="border-radius:24px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.2); background:#1e2419; position:relative;">
+      <div style="position:absolute; inset:0; pointer-events:none; opacity:0.5; mix-blend-mode:overlay; background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>&quot;);"></div>
+        <div style="background:#232b1c; padding:18px 22px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:28px;height:28px;border-radius:8px;background:#e8543f;display:flex;align-items:center;justify-content:center; box-shadow:0 3px 0 #a5392b;">
+              <div style="position:relative; width:14px; height:14px;">
+                <div style="position:absolute; width:11px; height:11px; border-radius:50%; background:#f4ede1; bottom:0; left:1px;"></div>
+                <div style="position:absolute; width:5px; height:3px; border-radius:0 60% 0 60%; background:#e0c14c; top:0; right:1px; transform:rotate(20deg);"></div>
+              </div>
+            </div>
+            <span style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:17px; color:#f4ede1;">Apple-Dex</span>
+          </div>
+        </div>
+        <div style="padding:16px 22px 22px;">
+          <div style="border-radius:18px; overflow:hidden; box-shadow:0 6px 0 #10150a; background:#262e1f; height:220px; display:flex; align-items:center; justify-content:center;">
+            <div style="width:56px;height:56px;border-radius:50% 50% 50% 8px; background:#3d4732; transform:rotate(-45deg);"></div>
+          </div>
+          <div style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:24px; color:#f4ede1; margin-top:14px;">Akane</div>
+          <div style="font-family:'Nunito Sans',sans-serif; font-size:13px; color:#b7c19c; margin-top:2px;">Japan, 1937</div>
+          <div style="text-align:center; margin-top:26px; padding:14px; border-radius:16px; background:#f2634c; color:#fff; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:16px; box-shadow:0 5px 0 #a5392b; transition:transform .08s, box-shadow .08s;" style-active="transform:translateY(4px); box-shadow:0 1px 0 #a5392b;">Catch it! 🍏</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2c: Log a catch -->
+    <div id="2c" style="position:relative; width:380px; padding-top:14px;">
+      <div class="badge" style="background:#e8543f;">2c — Log a catch</div>
+      <div style="border-radius:24px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.2); background:#1e2419; position:relative;">
+      <div style="position:absolute; inset:0; pointer-events:none; opacity:0.5; mix-blend-mode:overlay; background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>&quot;);"></div>
+        <div style="background:#232b1c; padding:18px 22px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:28px;height:28px;border-radius:8px;background:#e8543f;display:flex;align-items:center;justify-content:center; box-shadow:0 3px 0 #a5392b;">
+              <div style="position:relative; width:14px; height:14px;">
+                <div style="position:absolute; width:11px; height:11px; border-radius:50%; background:#f4ede1; bottom:0; left:1px;"></div>
+                <div style="position:absolute; width:5px; height:3px; border-radius:0 60% 0 60%; background:#e0c14c; top:0; right:1px; transform:rotate(20deg);"></div>
+              </div>
+            </div>
+            <span style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:17px; color:#f4ede1;">Apple-Dex</span>
+          </div>
+        </div>
+        <div style="padding:18px 22px 22px; display:flex; flex-direction:column; gap:14px;">
+          <div style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:20px; color:#f4ede1;">Log a catch</div>
+          <div>
+            <div style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:12px; color:#dde2c9; margin-bottom:6px;">Variety</div>
+            <input value="lady" style="width:100%; box-sizing:border-box; padding:11px 14px; border-radius:12px; border:none; background:#3a4530; color:#f4ede1; font-family:'Nunito Sans',sans-serif; font-size:13px;"/>
+            <div style="margin-top:6px; background:#3a4530; border-radius:12px; overflow:hidden;">
+              <div style="padding:10px 14px; font-family:'Nunito Sans',sans-serif; font-size:13px; color:#f4ede1; border-bottom:1px solid #3a4530;">Pink Lady (Cripps Pink)</div>
+              <div style="padding:10px 14px; font-family:'Nunito Sans',sans-serif; font-size:13px; color:#e0c14c; font-weight:700;">+ Create 'lady' as new variety</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:12px; color:#dde2c9; margin-bottom:6px;">Photo (optional)</div>
+            <div style="display:flex; gap:8px;">
+              <div style="flex:1; text-align:center; padding:9px; border-radius:12px; background:#3a4530; color:#dde2c9; font-family:'Nunito Sans',sans-serif; font-size:12.5px; font-weight:700;">📷 Take photo</div>
+              <div style="flex:1; text-align:center; padding:9px; border-radius:12px; background:#3a4530; color:#dde2c9; font-family:'Nunito Sans',sans-serif; font-size:12.5px; font-weight:700;">🖼 Gallery</div>
+            </div>
+            <div style="margin-top:8px; border-radius:14px; overflow:hidden; width:110px; box-shadow:0 4px 0 #10150a;">
+              <div style="height:110px; background:linear-gradient(160deg,#e8735f,#a5392b);"></div>
+            </div>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <div style="flex:1;">
+              <div style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:12px; color:#dde2c9; margin-bottom:6px;">Date</div>
+              <div style="padding:10px 14px; border-radius:12px; background:#3a4530; color:#f4ede1; font-family:'Nunito Sans',sans-serif; font-size:13px;">17/07/2026</div>
+            </div>
+            <div style="flex:1;">
+              <div style="font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:12px; color:#dde2c9; margin-bottom:6px;">Location</div>
+              <div style="padding:10px 14px; border-radius:12px; background:#3a4530; color:#ff8266; font-family:'Nunito Sans',sans-serif; font-size:12.5px; font-weight:700;">📍 Use my location</div>
+            </div>
+          </div>
+          <div style="text-align:center; padding:13px; border-radius:16px; background:#e0c14c; color:#2a2410; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:15px; box-shadow:0 5px 0 #a8891f; transition:transform .08s, box-shadow .08s;" style-active="transform:translateY(4px); box-shadow:0 1px 0 #a8891f;">Save catch</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section style="padding:60px 40px 100px; display:flex; flex-direction:column; gap:24px;">
+  <div>
+    <div style="font-size:13px; text-transform:uppercase; letter-spacing:.12em; color:#8a8677; font-weight:600;">Turn 1</div>
+    <h1 style="font-family:'Lora',serif; font-size:28px; margin:6px 0 0; color:#2a2a24;">Three whimsy directions — same dark orchard palette</h1>
+    <p style="color:#6b6a5e; font-size:15px; max-width:640px; margin:8px 0 0;">Main dex screen only, minimal gamification kept as requested. Reference with 1a / 1b / 1c.</p>
+  </div>
+
+  <div style="display:flex; gap:40px; flex-wrap:wrap; align-items:flex-start;">
+
+    <!-- 1a: Naturalist Field Guide -->
+    <div id="1a" style="position:relative; width:420px; padding-top:14px;">
+      <div class="badge">1a — Field Guide</div>
+      <div style="border-radius:20px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.18); background:#1e2419;">
+      <div style="background:repeating-linear-gradient(135deg,#232b1c,#232b1c 2px,#1e2419 2px,#1e2419 14px); padding:22px 24px 16px; border-bottom:1px solid #34402a;">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:30px;height:30px;border-radius:50%;background:#e0c14c;display:flex;align-items:center;justify-content:center;">
+              <div style="width:14px;height:14px;border-radius:50% 50% 50% 0;background:#c0392b;transform:rotate(45deg);"></div>
+            </div>
+            <span style="font-family:'Lora',serif; font-weight:600; font-size:19px; color:#f4ede1;">Apple-Dex</span>
+          </div>
+          <div style="width:22px;height:22px;border:1.5px solid #7c8567;border-radius:50%;"></div>
+        </div>
+        <div style="font-family:'Lora',serif; font-size:22px; color:#f4ede1; margin-top:18px;">3 varieties catalogued</div>
+        <div style="height:1px;background:linear-gradient(90deg,#e0c14c,transparent); margin-top:8px;"></div>
+      </div>
+      <div style="padding:16px 24px;">
+        <input placeholder="Search the specimen index…" style="width:100%; box-sizing:border-box; padding:10px 14px; border-radius:6px; border:1px solid #3d4a30; background:#242b1d; color:#e8e4d8; font-family:'Work Sans',sans-serif; font-size:13px;"/>
+        <div style="display:flex; gap:8px; margin-top:12px;">
+          <div style="padding:6px 14px; border-radius:4px; background:#e0c14c; color:#2a2410; font-size:12px; font-weight:600; font-family:'Work Sans',sans-serif;">Recently found</div>
+          <div style="padding:6px 14px; border-radius:4px; border:1px solid #4a563a; color:#b9c0a3; font-size:12px; font-family:'Work Sans',sans-serif;">A–Z</div>
+        </div>
+      </div>
+      <div style="padding:4px 24px 26px; display:grid; grid-template-columns:repeat(3,1fr); gap:12px;">
+        <div style="border:1px solid #4a563a; border-radius:10px; overflow:hidden; background:#242b1d;">
+          <div style="height:90px; background:linear-gradient(160deg,#8a6a3f,#5c4527); position:relative;">
+            <div style="position:absolute; inset:0; background:repeating-linear-gradient(45deg,rgba(255,255,255,0.04) 0 6px, transparent 6px 12px);"></div>
+          </div>
+          <div style="padding:8px 10px;">
+            <div style="font-family:'Lora',serif; font-size:13px; color:#f4ede1;">Golden Delicious</div>
+            <div style="font-size:10.5px; color:#8a9270; margin-top:2px;">16.07.2026</div>
+          </div>
+        </div>
+        <div style="border:1px solid #4a563a; border-radius:10px; overflow:hidden; background:#242b1d;">
+          <div style="height:90px; background:linear-gradient(160deg,#a34437,#6e2c22); position:relative;">
+            <div style="position:absolute; inset:0; background:repeating-linear-gradient(45deg,rgba(255,255,255,0.04) 0 6px, transparent 6px 12px);"></div>
+          </div>
+          <div style="padding:8px 10px;">
+            <div style="font-family:'Lora',serif; font-size:13px; color:#f4ede1;">Gala</div>
+            <div style="font-size:10.5px; color:#8a9270; margin-top:2px;">16.07.2026</div>
+          </div>
+        </div>
+        <div style="border:1px solid #4a563a; border-radius:10px; overflow:hidden; background:#242b1d;">
+          <div style="height:90px; background:linear-gradient(160deg,#8f3a2c,#5c2118); position:relative;">
+            <div style="position:absolute; inset:0; background:repeating-linear-gradient(45deg,rgba(255,255,255,0.04) 0 6px, transparent 6px 12px);"></div>
+          </div>
+          <div style="padding:8px 10px;">
+            <div style="font-family:'Lora',serif; font-size:13px; color:#f4ede1;">Braeburn</div>
+            <div style="font-size:10.5px; color:#8a9270; margin-top:2px;">16.07.2026</div>
+          </div>
+        </div>
+        <sc-for list="{{ fieldGuideBlank }}" as="v" hint-placeholder-count="6">
+          <div style="border:1px dashed #3f4a33; border-radius:10px; overflow:hidden; background:#1f251a;">
+            <div style="height:90px; display:flex; align-items:center; justify-content:center;">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#5b6449" stroke-width="1.3">
+                <path d="M12 21c-4 0-7-3.5-7-8 0-3.2 2-5.5 4-5.5 1 0 1.6.5 3 .5s2-.5 3-.5c2 0 4 2.3 4 5.5 0 4.5-3 8-7 8z"/>
+                <path d="M12 7.5c0-1.8 1-3 2.6-3.3"/>
+              </svg>
+            </div>
+            <div style="padding:8px 10px;">
+              <div style="font-family:'Lora',serif; font-size:12.5px; color:#7c8567;">{{ v.name }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      </div>
+    </div>
+
+    <!-- 1b: Collector's Game -->
+    <div id="1b" style="position:relative; width:420px; padding-top:14px;">
+      <div class="badge" style="background:#e8543f;">1b — Collector's Game</div>
+      <div style="border-radius:24px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.2); background:#1e2419; position:relative;">
+      <div style="position:absolute; inset:0; pointer-events:none; opacity:0.5; mix-blend-mode:overlay; background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>&quot;);"></div>
+      <div class="fr" style="background:#232b1c; padding:22px 24px 18px; animation-delay:.02s;">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:32px;height:32px;border-radius:9px;background:#e8543f;display:flex;align-items:center;justify-content:center; box-shadow:0 3px 0 #a5392b;">
+              <div style="position:relative; width:16px; height:16px;">
+                <div style="position:absolute; width:12.5px; height:12.5px; border-radius:50%; background:#f4ede1; bottom:0; left:1.5px;"></div>
+                <div style="position:absolute; width:6px; height:3.5px; border-radius:0 60% 0 60%; background:#e0c14c; top:0; right:1px; transform:rotate(20deg);"></div>
+              </div>
+            </div>
+            <span style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:20px; color:#f4ede1;">Apple-Dex</span>
+          </div>
+          <div style="width:24px;height:24px; border-radius:7px; background:#3a4530;"></div>
+        </div>
+        <div style="display:flex; align-items:baseline; gap:8px; margin-top:16px;">
+          <span style="font-family:'Baloo 2',sans-serif; font-weight:700; font-size:26px; color:#e0c14c;">3</span>
+          <span style="font-family:'Nunito Sans',sans-serif; font-size:14px; color:#dde2c9;">varieties caught</span>
+        </div>
+      </div>
+      <div class="fr" style="padding:16px 24px 6px; animation-delay:.1s;">
+        <input placeholder="Search…" style="width:100%; box-sizing:border-box; padding:11px 14px; border-radius:14px; border:none; background:#3a4530; color:#e8e4d8; font-family:'Nunito Sans',sans-serif; font-size:13px;"/>
+        <div style="display:flex; gap:8px; margin-top:12px;">
+          <div style="padding:7px 16px; border-radius:20px; background:#e0c14c; color:#2a2410; font-size:12px; font-weight:700; font-family:'Nunito Sans',sans-serif; box-shadow:0 3px 0 #a8891f;">Recent</div>
+          <div style="padding:7px 16px; border-radius:20px; background:#3a4530; color:#dde2c9; font-size:12px; font-weight:700; font-family:'Nunito Sans',sans-serif;">A–Z</div>
+        </div>
+      </div>
+      <div style="padding:12px 24px 26px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px;">
+        <div class="fi" style="border-radius:16px; overflow:hidden; background:#3a4530; transform:rotate(-2deg); box-shadow:0 4px 0 #171d10; animation-delay:.18s;">
+          <div style="height:88px; background:linear-gradient(160deg,#f2c14e,#c99a2c);"></div>
+          <div style="padding:8px 9px;">
+            <div style="font-family:'Baloo 2',sans-serif; font-size:12.5px; color:#f4ede1; font-weight:600;">Golden Delicious</div>
+          </div>
+        </div>
+        <div class="fi" style="border-radius:16px; overflow:hidden; background:#3a4530; transform:rotate(1.5deg); box-shadow:0 4px 0 #171d10; animation-delay:.24s;">
+          <div style="height:88px; background:linear-gradient(160deg,#e8543f,#a5392b);"></div>
+          <div style="padding:8px 9px;">
+            <div style="font-family:'Baloo 2',sans-serif; font-size:12.5px; color:#f4ede1; font-weight:600;">Gala</div>
+          </div>
+        </div>
+        <div class="fi" style="border-radius:16px; overflow:hidden; background:#3a4530; transform:rotate(-1deg); box-shadow:0 4px 0 #171d10; animation-delay:.3s;">
+          <div style="height:88px; background:linear-gradient(160deg,#a5392b,#6e2c22);"></div>
+          <div style="padding:8px 9px;">
+            <div style="font-family:'Baloo 2',sans-serif; font-size:12.5px; color:#f4ede1; font-weight:600;">Braeburn</div>
+          </div>
+        </div>
+        <sc-for list="{{ gameBlank }}" as="v" hint-placeholder-count="6">
+          <div class="fid" style="border-radius:16px; overflow:hidden; background:#262e1f; animation-delay:.36s;">
+            <div style="height:88px; display:flex; align-items:center; justify-content:center;">
+              <div style="width:30px;height:30px;border-radius:50% 50% 50% 6px; background:#454f38; transform:rotate(-45deg);"></div>
+            </div>
+            <div style="padding:8px 9px;">
+              <div style="font-family:'Baloo 2',sans-serif; font-size:12px; color:#f0d9a8; font-weight:600;">{{ v.name }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      </div>
+    </div>
+
+    <!-- 1c: Cozy Orchard Journal -->
+    <div id="1c" style="position:relative; width:420px; padding-top:14px;">
+      <div class="badge" style="background:#7a5a34;">1c — Orchard Journal</div>
+      <div style="border-radius:14px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.2); background:#1e2419;">
+      <div style="padding:20px 22px 4px;">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:18px;">🍎</span>
+            <span style="font-family:'Source Serif 4',serif; font-weight:700; font-size:19px; color:#f4ede1;">Apple-Dex</span>
+          </div>
+          <div style="font-family:'Caveat',cursive; font-size:18px; color:#c9a26a;">est. 2026</div>
+        </div>
+        <div style="font-family:'Caveat',cursive; font-size:24px; color:#e0c14c; margin-top:14px;">3 apples tasted so far ✎</div>
+      </div>
+      <div style="background:#f4ede1; margin:14px 22px 0; border-radius:8px; padding:16px 16px 20px; box-shadow:inset 0 0 0 1px #e3d8c2;">
+        <input placeholder="jot down a variety…" style="width:100%; box-sizing:border-box; padding:9px 12px; border-radius:6px; border:1px solid #ddd0b4; background:#fffdf9; color:#4a3c26; font-family:'Work Sans',sans-serif; font-size:13px;"/>
+        <div style="display:flex; gap:16px; margin-top:10px; font-family:'Caveat',cursive; font-size:17px;">
+          <span style="color:#a5392b; text-decoration:underline; text-underline-offset:3px;">recent</span>
+          <span style="color:#8a7a5c;">a–z</span>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:16px;">
+          <div style="background:#fffdf9; padding:6px 6px 8px; border-radius:4px; box-shadow:0 2px 6px rgba(0,0,0,0.12); transform:rotate(-2deg);">
+            <div style="height:76px; background:linear-gradient(160deg,#e8c766,#c99a2c); border-radius:2px;"></div>
+            <div style="font-family:'Caveat',cursive; font-size:15px; color:#4a3c26; margin-top:5px; text-align:center;">Golden Delicious</div>
+          </div>
+          <div style="background:#fffdf9; padding:6px 6px 8px; border-radius:4px; box-shadow:0 2px 6px rgba(0,0,0,0.12); transform:rotate(1.5deg);">
+            <div style="height:76px; background:linear-gradient(160deg,#e8735f,#a5392b); border-radius:2px;"></div>
+            <div style="font-family:'Caveat',cursive; font-size:15px; color:#4a3c26; margin-top:5px; text-align:center;">Gala</div>
+          </div>
+          <div style="background:#fffdf9; padding:6px 6px 8px; border-radius:4px; box-shadow:0 2px 6px rgba(0,0,0,0.12); transform:rotate(-1deg);">
+            <div style="height:76px; background:linear-gradient(160deg,#a5674a,#6e3c22); border-radius:2px;"></div>
+            <div style="font-family:'Caveat',cursive; font-size:15px; color:#4a3c26; margin-top:5px; text-align:center;">Braeburn</div>
+          </div>
+          <sc-for list="{{ journalBlank }}" as="v" hint-placeholder-count="6">
+            <div style="background:#fbf6ec; padding:6px 6px 8px; border-radius:4px; border:1px dashed #d8c9a8;">
+              <div style="height:76px; display:flex; align-items:center; justify-content:center;">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c2ad84" stroke-width="1.3">
+                  <path d="M12 21c-4 0-7-3.5-7-8 0-3.2 2-5.5 4-5.5 1 0 1.6.5 3 .5s2-.5 3-.5c2 0 4 2.3 4 5.5 0 4.5-3 8-7 8z"/>
+                </svg>
+              </div>
+              <div style="font-family:'Caveat',cursive; font-size:14px; color:#b7a684; margin-top:5px; text-align:center;">{{ v.name }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="height:16px;"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const names = ['Akane','Alkmene','Ambrosia','Angold',"Ashmead's Kernel",'Berlepsch'];
+    const mk = () => names.map(n => ({ name: n }));
+    return { fieldGuideBlank: mk(), gameBlank: mk(), journalBlank: mk() };
+  }
+}
+</script>
+</body>
+</html>

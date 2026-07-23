@@ -174,15 +174,15 @@ new #[Layout('layouts.dex')] class extends Component
         </div>
 
         <div>
-            <div class="flex items-start justify-between gap-2">
+            <div class="flex items-center justify-between gap-2">
                 <h1 class="font-display font-bold text-2xl text-dex-text">{{ $variety->name }}</h1>
                 <button
                     type="button"
                     wire:click="toggleFavorite"
-                    class="text-2xl leading-none shrink-0"
+                    class="p-2.5 -m-2.5 shrink-0 active:scale-90 transition-transform"
                     aria-label="{{ $this->catch->is_favorite ? __('Unfavorite') : __('Favorite') }}"
                 >
-                    {{ $this->catch->is_favorite ? '⭐' : '☆' }}
+                    <x-star-icon :filled="$this->catch->is_favorite" />
                 </button>
             </div>
             <div class="flex items-center gap-2 flex-wrap mt-1">

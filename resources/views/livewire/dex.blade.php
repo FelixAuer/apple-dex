@@ -178,7 +178,7 @@ new #[Layout('layouts.dex')] class extends Component
                                 style="animation-delay: {{ $delay }}s"
                             >
                                 @if ($catch->is_favorite)
-                                    <span class="absolute top-1.5 right-1.5 z-10 text-sm drop-shadow">⭐</span>
+                                    <x-star-icon filled class="absolute top-1.5 right-1.5 z-10 drop-shadow" :size="16" />
                                 @endif
 
                                 <div class="aspect-[4/3] bg-cover bg-center bg-dex-surface" @if ($photoUrl) style="background-image: url('{{ $photoUrl }}')" @endif>
