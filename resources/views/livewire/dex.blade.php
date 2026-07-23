@@ -80,6 +80,10 @@ new #[Layout('layouts.dex')] class extends Component
 
         return match ($this->sort) {
             'az' => $caught->sortBy(fn (Variety $variety) => Str::lower($variety->name))->values(),
+            'favorites' => $caught
+                ->sortByDesc(fn (Variety $variety) => $variety->catches->first()->caught_at)
+                ->sortByDesc(fn (Variety $variety) => $variety->catches->first()->is_favorite)
+                ->values(),
             default => $caught->sortByDesc(fn (Variety $variety) => $variety->catches->first()->caught_at)->values(),
         };
     }
@@ -141,7 +145,7 @@ new #[Layout('layouts.dex')] class extends Component
                         <h2 class="font-display font-bold text-sm text-dex-label">{{ Str::ucfirst($caughtWord) }}</h2>
 
                         <div class="flex gap-2 text-xs font-bold">
-                            @foreach (['recent' => __('Recent'), 'az' => __('A–Z')] as $value => $label)
+                            @foreach (['recent' => __('Recent'), 'az' => __('A–Z'), 'favorites' => __('Favorites')] as $value => $label)
                                 <button
                                     type="button"
                                     wire:click="$set('sort', '{{ $value }}')"
@@ -170,9 +174,13 @@ new #[Layout('layouts.dex')] class extends Component
                                 href="{{ route('varieties.show', $variety) }}"
                                 wire:navigate
                                 wire:key="variety-{{ $variety->id }}"
-                                class="block rounded-2xl overflow-hidden anim-fade-in bg-dex-card shadow-[0_4px_0_#171d10] {{ $rotation }}"
+                                class="block relative rounded-2xl overflow-hidden anim-fade-in bg-dex-card shadow-[0_4px_0_#171d10] {{ $rotation }}"
                                 style="animation-delay: {{ $delay }}s"
                             >
+                                @if ($catch->is_favorite)
+                                    <span class="absolute top-1.5 right-1.5 z-10 text-sm drop-shadow">⭐</span>
+                                @endif
+
                                 <div class="aspect-[4/3] bg-cover bg-center bg-dex-surface" @if ($photoUrl) style="background-image: url('{{ $photoUrl }}')" @endif>
                                     @unless ($photoUrl)
                                         <div class="w-full h-full flex items-center justify-center text-3xl">🍎</div>

@@ -135,6 +135,21 @@ new #[Layout('layouts.dex')] class extends Component
         unset($this->catch);
     }
 
+    public function toggleFavorite(): void
+    {
+        $catch = $this->catch;
+
+        if (! $catch) {
+            return;
+        }
+
+        $this->authorize('update', $catch);
+
+        $catch->update(['is_favorite' => ! $catch->is_favorite]);
+
+        unset($this->catch);
+    }
+
     public function deleteVariety(): void
     {
         $this->authorize('delete', $this->variety);
@@ -159,7 +174,17 @@ new #[Layout('layouts.dex')] class extends Component
         </div>
 
         <div>
-            <h1 class="font-display font-bold text-2xl text-dex-text">{{ $variety->name }}</h1>
+            <div class="flex items-start justify-between gap-2">
+                <h1 class="font-display font-bold text-2xl text-dex-text">{{ $variety->name }}</h1>
+                <button
+                    type="button"
+                    wire:click="toggleFavorite"
+                    class="text-2xl leading-none shrink-0"
+                    aria-label="{{ $this->catch->is_favorite ? __('Unfavorite') : __('Favorite') }}"
+                >
+                    {{ $this->catch->is_favorite ? '⭐' : '☆' }}
+                </button>
+            </div>
             <div class="flex items-center gap-2 flex-wrap mt-1">
                 @if ($variety->origin)
                     <span class="text-dex-meta text-[13px]">{{ $variety->origin }}</span>

@@ -12,7 +12,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-#[Fillable(['user_id', 'variety_id', 'caught_at', 'lat', 'lng', 'location_label', 'notes'])]
+#[Fillable(['user_id', 'variety_id', 'caught_at', 'lat', 'lng', 'location_label', 'notes', 'is_favorite'])]
 class AppleCatch extends Model implements HasMedia
 {
     /** @use HasFactory<AppleCatchFactory> */
@@ -26,6 +26,7 @@ class AppleCatch extends Model implements HasMedia
             'caught_at' => 'date',
             'lat' => 'decimal:7',
             'lng' => 'decimal:7',
+            'is_favorite' => 'boolean',
         ];
     }
 
